@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Contracts.Client.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Services.Client;
 using TrainingToolsApp.Services;
 
@@ -30,10 +31,12 @@ public static class MauiProgram
         builder.Services.AddMauiBlazorWebView();
         
         builder.Services.AddHttpClient();
-        builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<IFetchService, CrossPlatformFetchService>();
         builder.Services.AddScoped<ICookiesProvider, MauiCookiesProvider>();
+        builder.Services.AddScoped<RequestBuilder>();
         builder.Services.AddSingleton<ILinkGenerator, ConfigLinkGenerator>();
+        builder.Services.AddTransient<Linker>();
+        builder.Services.AddHttpContextAccessor();
         
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();

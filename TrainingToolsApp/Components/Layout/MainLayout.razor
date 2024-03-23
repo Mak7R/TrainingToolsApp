@@ -1,8 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
-<main style="min-height: 100vh; width: 100%">
-    <NavMenu/>
-    <div class="container-fluid p-2">
-        @Body
-    </div>
+<main style="height: 100vh;">
+  <NavMenu/>
+  <div class="container-fluid py-3 px-1">
+    @Body
+  </div>
+  <style>
+    center{
+      display: none;
+    }
+  </style>
+  <div class="row"></div>
 </main>

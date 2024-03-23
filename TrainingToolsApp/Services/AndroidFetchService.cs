@@ -12,8 +12,9 @@ public class AndroidFetchService : IFetchService
         try
         {
             var flurlRequest = new FlurlRequest(new Url(request.Url));
-            flurlRequest = request.Headers.Aggregate(flurlRequest, (current, header) => current.WithHeader(header.Key, string.Join(", ", header.Value)));
-            
+            flurlRequest = request.Headers.Aggregate(flurlRequest,
+                (current, header) => current.WithHeader(header.Key, string.Join(", ", header.Value)));
+
             IFlurlResponse response;
             if (request.Method == "GET" && string.IsNullOrWhiteSpace(request.Content))
             {
@@ -26,14 +27,24 @@ public class AndroidFetchService : IFetchService
             }
             else
             {
-                response = await flurlRequest.SendAsync(HttpMethod.Parse(request.Method), new StringContent(request.Content, request.Encoding, request.ContentType));
+                response = await flurlRequest.SendAsync(HttpMethod.Parse(request.Method),
+                    new StringContent(request.Content, request.Encoding, request.ContentType));
             }
-            
+
             return new HttpResponse(
                 isSuccessStatusCode: response.ResponseMessage.IsSuccessStatusCode,
                 statusCode: response.StatusCode,
                 content: await response.ResponseMessage.Content.ReadAsStringAsync(),
                 headers: response.ResponseMessage.Headers
+            );
+        }
+        catch (FlurlHttpException flurlHttpException)
+        {
+            return new HttpResponse(
+                isSuccessStatusCode: false,
+                statusCode: flurlHttpException.StatusCode ?? 0,
+                content: flurlHttpException.Message,
+                headers: new Dictionary<string, IEnumerable<string>>()
             );
         }
         catch (Exception ex)

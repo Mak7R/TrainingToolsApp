@@ -1,4 +1,4 @@
-﻿namespace TrainingToolsApp.Components;
+﻿namespace TrainingTools.Components;
 
 public static class StaticHtml
 {

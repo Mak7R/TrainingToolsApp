@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using TrainingTools.ViewModels;
 
-namespace TrainingToolsApp.Components;
+namespace TrainingTools.Components;
 
 public class RequestCollectionsHelper
 {

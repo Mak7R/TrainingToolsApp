@@ -20,10 +20,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
         <Nullable>enable</Nullable>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+		
+		<!-- Build Release Only
 		
 		<WindowsPackageType>None</WindowsPackageType>
 		<WindowsAppSDKSelfContained Condition="'$(IsUnpackaged)' == 'true'">true</WindowsAppSDKSelfContained>
-		<SelfContained Condition="'$(IsUnpackaged)' == 'true'">true</SelfContained>
+		<SelfContained Condition="'$(IsUnpackaged)' == 'true'">true</SelfContained>-->
 
         <!-- Display name -->
         <ApplicationTitle>TrainingToolsApp</ApplicationTitle>
@@ -80,6 +83,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\TrainingTools\AppBase\AppBase.csproj" />
       <ProjectReference Include="..\..\TrainingTools\Contracts.Client\Contracts.Client.csproj" />
       <ProjectReference Include="..\..\TrainingTools\Services.Client\Services.Client.csproj" />
       <ProjectReference Include="..\..\TrainingTools\TrainingTools.ViewModels\TrainingTools.ViewModels.csproj" />
